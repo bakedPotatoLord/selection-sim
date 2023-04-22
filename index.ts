@@ -4,13 +4,23 @@ let numWhite = 50
 let numBlack = 50
 let gen = 0
 
-let tempWhite
-let tempBlack
+let tempWhite:number,tempBlack:number
+
+interface generationData{
+  numWhite:number
+  numBlack:number
+  gen?:number
+
+  totalOrganisms?:number
+  blackFrequency?:number
+  whiteFrequency?:number
+}
+
+let data :generationData[] = [createData()]
 
 while(numWhite >0){
   gen++
-  log()
-
+  
   tempWhite = 0
   tempBlack = 0
 
@@ -37,23 +47,25 @@ while(numWhite >0){
   //put remains back in bag
   numWhite = tempWhite
   numBlack = tempBlack
+
+  data.push(createData())
+
 }
-log()
 console.log("\nsimulation complete")
+console.table(data)
 
 function pickRandom( white : number,black:number){
   // true-> black
   // false-> white
-  const total = black + white
-  return   Math.random()  < (black/total)
+  return Math.random() < (black/(black + white))
 }
 
-function log(){
-  const total = numWhite + numBlack
-  console.log("\ngeneration",gen)
-  console.log("amount of individuals",total)
-  console.log("total black",numBlack)
-  console.log("total white",numWhite)
-  console.log("black frequency",numBlack/total)
-  console.log("white frequency",numWhite/total)
+function createData():generationData{
+  return {
+    totalOrganisms: (numWhite + numBlack )/2,
+    numBlack,
+    numWhite,
+    blackFrequency: Number((numBlack/(numWhite + numBlack)).toPrecision(4)),
+    whiteFrequency: Number((numWhite/(numWhite + numBlack)).toPrecision(4))
+  }
 }
