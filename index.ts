@@ -1,44 +1,59 @@
 //@author  @bakedpotatolord
 
-
-
-type bead = "white" | "black";
-
-let arr : bead[] =[...Array(50).fill("white"), ...Array(50).fill("black")]
+let numWhite = 50
+let numBlack = 50
 let gen = 0
 
-while(arr.includes("white")){
+let tempWhite
+let tempBlack
+
+while(numWhite >0){
   gen++
+  log()
 
-  arr = shuffle(arr)
+  tempWhite = 0
+  tempBlack = 0
 
-  let nextGen: bead[] = []
+  while(numWhite > 0 || numBlack > 0){
+    
+    let t1 = pickRandom(numWhite,numBlack)
+    let t2 =  t1? pickRandom(numWhite,numBlack-1):pickRandom(numWhite-1,numBlack) 
 
-  while(arr.length >1){
-
-    let beads: [bead,bead] = [<bead>arr.shift(),<bead>arr.shift()]
-
-    if(beads[0] == 'black' || beads[1] == 'black'){
-      nextGen.push(...beads)
+    if(t1 && t2){
+      numBlack-=2
+      tempBlack+=2
+    }else if((t1 || t2)){
+      //remove from bag
+      numWhite--
+      numBlack--
+      //add to outside bag
+      tempWhite++
+      tempBlack++
+    }else{
+      //remove 2 from outside bag 
+      numWhite-=2
     }
   }
+  //put remains back in bag
+  numWhite = tempWhite
+  numBlack = tempBlack
+}
+log()
+console.log("\nsimulation complete")
 
-  arr = nextGen
-  console.log("\ngeneration",gen)
-  console.log("amount of individuals",arr.length/2)
-  console.log("total black",arr.filter(x => x == 'black').length)
-  console.log("total white",arr.filter(x => x == 'white').length)
-  console.log("black frequency",arr.filter(x => x == 'black').length/arr.length)
-  console.log("white frequency",arr.filter(x => x == 'white').length/arr.length)
-  
+function pickRandom( white : number,black:number){
+  // true-> black
+  // false-> white
+  const total = black + white
+  return   Math.random()  < (black/total)
 }
 
-function shuffle(arr:any[]){
-  let currentIndex = arr.length, randomIndex;
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
-  }
-  return arr;
+function log(){
+  const total = numWhite + numBlack
+  console.log("\ngeneration",gen)
+  console.log("amount of individuals",total)
+  console.log("total black",numBlack)
+  console.log("total white",numWhite)
+  console.log("black frequency",numBlack/total)
+  console.log("white frequency",numWhite/total)
 }
