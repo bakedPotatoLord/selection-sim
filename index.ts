@@ -1,6 +1,7 @@
 //@author  @bakedpotatolord
 import ReadLine from 'readline';
 import chalk from 'chalk';
+import chalkAnimation from 'chalk-animation';
 
 let numWhite = 50
 let numBlack = 50
@@ -115,5 +116,6 @@ function createData():generationData{
 }
 
 function doShit() {
-  console.log('shit done')
+  let str = chalkAnimation.rainbow("ooh! Rainbow Shit")
+  str.render()
 }
