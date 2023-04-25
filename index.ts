@@ -1,5 +1,5 @@
 //@author  @bakedpotatolord
-import ReadLine from 'readline/promises';
+import ReadLine from 'readline';
 import chalk from 'chalk';
 
 let numWhite = 50
@@ -32,18 +32,24 @@ getOption()
 
 async function getOption(){
   console.log(" 'W' to run simuation, 'Q' to quit, 'S' to do shit")
-  switch(await readLine.question('what do you want to do? ')){
-    case 'W':
-      runSimulation()
-      getOption()
-      break
-    case 'Q':
-      process.exit(0)
-    case 'S':
-      console.log(chalk.red('shit is done'))
-      getOption()
-      break
-  }
+  readLine.question('what do you want to do? ',(answer)=>{
+    switch(answer.toUpperCase()){
+      case 'W':
+        runSimulation()
+        getOption()
+        break
+      case 'Q':
+        process.exit(0)
+        break
+      case 'S':
+        doShit()
+        getOption()
+        break
+      default:
+        console.log(chalk.redBright('invalid option'))
+        getOption()
+    }
+  })
 }
 
 function reset(){
@@ -106,4 +112,8 @@ function createData():generationData{
     blackFrequency: Number((numBlack/(numWhite + numBlack)).toPrecision(4)),
     whiteFrequency: Number((numWhite/(numWhite + numBlack)).toPrecision(4))
   }
+}
+
+function doShit() {
+  console.log('shit done')
 }
