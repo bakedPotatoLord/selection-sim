@@ -1,4 +1,5 @@
 import {ch, ctx, cw} from './index.js'
+import { GenerationData } from './runSimulation.js'
 
 export const TAU = Math.PI * 2
 export function drawBackground(){
@@ -97,4 +98,18 @@ export function nextButton(){
   ctx.fillStyle = 'white'
   ctx.font = '30px serif'
   ctx.fillText("Next",50,364)
+}
+
+export function graph(data:GenerationData[]){
+  ctx.fillStyle = 'lightGrey'
+  ctx.fillRect(300,40,250,150)
+  ctx.save()
+  ctx.translate(300,40)
+  ctx.scale(1,1/4)
+  ctx.moveTo(0,0)
+  for(let i =0;i<data.length;i++){
+    ctx.lineTo((i/data.length)*300,data[i].numWhite)
+  }
+  ctx.stroke()
+  ctx.restore()
 }

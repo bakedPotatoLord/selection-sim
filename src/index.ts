@@ -1,7 +1,7 @@
 //@author  @bakedpotatolord
 import './style.css'
 import {runSimulation, GenerationData, pickRandom} from './runSimulation.js'
-import {drawBackground, drawOverlayText,drawMarbles, nextButton} from './drawing.js'
+import {drawBackground, drawOverlayText,drawMarbles, nextButton, graph} from './drawing.js'
 
 const c = document.querySelector('canvas')
 export const ctx = c.getContext('2d')
@@ -30,6 +30,7 @@ function mainLoop(){
     deadWhite
   )
   nextButton()
+  graph(data)
 
 }
 
