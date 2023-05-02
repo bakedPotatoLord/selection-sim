@@ -94,4 +94,7 @@ export function drawMarbles(
 export function nextButton(){
   ctx.fillStyle = 'green'
   ctx.fillRect(30,340,100,30)
+  ctx.fillStyle = 'white'
+  ctx.font = '30px serif'
+  ctx.fillText("Next",50,364)
 }
