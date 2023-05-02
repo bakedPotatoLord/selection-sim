@@ -5,10 +5,7 @@ import {drawBackground, drawOverlayText,drawMarbles, nextButton} from './drawing
 
 const c = document.querySelector('canvas')
 export const ctx = c.getContext('2d')
-const tArea = document.querySelector('textarea')
 const showData = <HTMLButtonElement>document.querySelector("#showData")
-
-tArea.hidden = true
 
 export const cw = c.width = 600
 export const ch = c.height = 400
@@ -62,6 +59,7 @@ function next(){
     bagWhite = aliveWhite
     aliveBlack = 0
     aliveWhite = 0
+    generation++
   }
 
 }
@@ -80,9 +78,3 @@ window.onload = ()=>{
   mainLoop()
 }
 
-showData.onclick = ()=>{
-  tArea.hidden = false
-  tArea.value = runSimulation()
-  .map(el=>JSON.stringify(el))
-  .join(',\n')
-}
