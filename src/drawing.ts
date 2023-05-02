@@ -28,7 +28,7 @@ export function drawBackground(){
   ctx.lineTo(160,80)
   ctx.fill()
 
-  ctx.fillStyle= 'white'
+  ctx.fillStyle= 'lightgrey'
 
   ctx.beginPath()
   ctx.moveTo(200,380)
@@ -50,11 +50,48 @@ export function drawOverlayText(generation:number){
   ctx.fillText("generation: "+generation, 10,20)
 }
 
-export function drawMarbles(){
+export function drawMarbles(
+  bagBlack:number,
+  bagWhite:number,
+  aliveBlack:number,
+  aliveWhite:number,
+
+  deadWhite:number
+  ){
   ctx.fillStyle = 'white'
   ctx.beginPath()
   ctx.ellipse(120,200,10,10,0,0,TAU)
   ctx.fill()
-  ctx.font = '20px serif'
+  ctx.beginPath()
+  ctx.ellipse(260,360,10,10,0,0,TAU)
+  ctx.fill()
+  ctx.beginPath()
+  ctx.ellipse(400,360,10,10,0,0,TAU)
+  ctx.fill()
+  ctx.beginPath()
+  ctx.ellipse(435,335,10,10,0,0,TAU)
+  ctx.fill()
+  ctx.font = '18px serif'
+  ctx.fillStyle = 'black'
+  ctx.beginPath()
+  ctx.ellipse(120,240,10,10,0,0,TAU)
+  ctx.fill()
+  ctx.beginPath()
+  ctx.ellipse(295,335,10,10,0,0,TAU)
+  ctx.fill()
+
+  ctx.fillText(bagBlack.toString(),140,245)
+  ctx.fillText(bagWhite.toString(),140,205)
   
+  ctx.fillText(aliveWhite.toString(),280,366)
+  ctx.fillText(aliveBlack.toString(),312,341)
+  
+  ctx.fillText((deadWhite/2).toString(),420,366)
+  ctx.fillText((deadWhite/2).toString(),452,341)
+  
+}
+
+export function nextButton(){
+  ctx.fillStyle = 'green'
+  ctx.fillRect(30,340,100,30)
 }
