@@ -74,12 +74,13 @@ function ffwd(){
 }
 
 c.onclick = (e)=>{
-  if(e.x > 10 && e.x < 90 && e.y > 340 && e.y < 370){
-    next()
-  }
-  if(e.x >100 && e.x <180 && e.y >340 && e.y < 370){
-    ffwd()
-
+  if(generation < 10){
+    if(e.offsetX > 10 && e.offsetX < 90 && e.offsetY > 340 && e.offsetY < 370){
+      next()
+    }
+    if(e.offsetX >100 && e.offsetX <180 && e.offsetY >340 && e.offsetY < 370){
+      ffwd()
+    }
   }
 }
 
