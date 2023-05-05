@@ -1,7 +1,7 @@
 //@author  @bakedpotatolord
 import './style.css'
-import { GenerationData, pickRandom} from './runSimulation.js'
-import {drawBackground, drawOverlayText,drawMarbles, nextButton, graph, ffwdButton} from './drawing.js'
+import { GenerationData, pickRandom } from './runSimulation.js'
+import { drawBackground, drawOverlayText, drawMarbles, nextButton, graph, ffwdButton } from './drawing.js'
 
 const c = document.querySelector('canvas')
 export const ctx = c.getContext('2d')
@@ -13,11 +13,11 @@ export const ch = c.height = 400
 let generation = 0
 
 let bagWhite = 50, bagBlack = 50,
-aliveWhite = 0, aliveBlack = 0,
-deadWhite = 0
-let data: GenerationData[] =[new GenerationData(bagBlack,bagWhite,generation)]
+  aliveWhite = 0, aliveBlack = 0,
+  deadWhite = 0
+let data: GenerationData[] = [new GenerationData(bagBlack, bagWhite, generation)]
 
-function mainLoop(){
+function mainLoop() {
   requestAnimationFrame(mainLoop)
 
   drawBackground()
@@ -35,57 +35,55 @@ function mainLoop(){
 
 }
 
-function next(){
-  if(bagWhite+bagBlack > 0){
+function next() {
+  if (bagWhite + bagBlack > 0) {
 
-    let t1 = pickRandom(bagWhite,bagBlack)
-    let t2 =  t1? pickRandom(bagWhite,bagBlack-1):pickRandom(bagWhite-1,bagBlack) 
+    let t1 = pickRandom(bagWhite, bagBlack)
+    let t2 = t1 ? pickRandom(bagWhite, bagBlack - 1) : pickRandom(bagWhite - 1, bagBlack)
 
-    if(t1 && t2){
-      bagBlack-=2
-      aliveBlack+=2
-    }else if((t1 || t2)){
+    if (t1 && t2) {
+      bagBlack -= 2
+      aliveBlack += 2
+    } else if ((t1 || t2)) {
       //remove from bag
       bagWhite--
       bagBlack--
       //add to outside bag
       aliveWhite++
       aliveBlack++
-    }else{
+    } else {
       //remove 2 from outside bag 
-      bagWhite-=2
-      deadWhite+=2
+      bagWhite -= 2
+      deadWhite += 2
     }
     return false
-  }else{
+  } else {
     bagBlack = aliveBlack
     bagWhite = aliveWhite
     aliveBlack = 0
     aliveWhite = 0
     generation++
-    data.push(new GenerationData(bagBlack,bagWhite,generation))
+    data.push(new GenerationData(bagBlack, bagWhite, generation))
     return true
   }
 
 }
 
-function ffwd(){
-  while(!next()){}
+function ffwd() {
+  while (!next()) { }
 }
 
-c.onclick = (e)=>{
-  if(generation < 10){
-    if(e.offsetX > 10 && e.offsetX < 90 && e.offsetY > 340 && e.offsetY < 370){
+c.onclick = (e) => {
+  if (generation < 10) {
+    if (e.offsetX > 10 && e.offsetX < 90 && e.offsetY > 340 && e.offsetY < 370) {
       next()
     }
-    if(e.offsetX >100 && e.offsetX <180 && e.offsetY >340 && e.offsetY < 370){
+    if (e.offsetX > 100 && e.offsetX < 180 && e.offsetY > 340 && e.offsetY < 370) {
       ffwd()
     }
   }
 }
-
-
-window.onload = ()=>{
+window.onload = () => {
 
   mainLoop()
 }
