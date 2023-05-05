@@ -67,10 +67,7 @@ export function drawMarbles(
   ctx.ellipse(260,360,10,10,0,0,TAU)
   ctx.fill()
   ctx.beginPath()
-  ctx.ellipse(400,360,10,10,0,0,TAU)
-  ctx.fill()
-  ctx.beginPath()
-  ctx.ellipse(435,335,10,10,0,0,TAU)
+  ctx.ellipse(417.5,347.5,10,10,0,0,TAU)
   ctx.fill()
   ctx.font = '18px serif'
   ctx.fillStyle = 'black'
@@ -87,9 +84,7 @@ export function drawMarbles(
   ctx.fillText(aliveWhite.toString(),280,366)
   ctx.fillText(aliveBlack.toString(),312,341)
   
-  ctx.fillText((deadWhite/2).toString(),420,366)
-  ctx.fillText((deadWhite/2).toString(),452,341)
-  
+  ctx.fillText((deadWhite).toString(),434,353.5)
 }
 
 export function nextButton(){
