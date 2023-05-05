@@ -1,7 +1,9 @@
 {
-  "name": "lobobellos.github.io",
-  "version": "0.0.0",
-  "type":"module",
+  "name": "selection-sim",
+  "version": "1.0.0",
+  "description": "A Typescript Project that simulates natural selection.",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,5 +16,16 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
     "vite": "^3.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bakedPotatoLord/selection-sim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bakedPotatoLord/selection-sim/issues"
+  },
+  "homepage": "https://github.com/bakedPotatoLord/selection-sim#readme"
 }
