@@ -5,13 +5,10 @@ import { drawBackground, drawOverlayText, drawMarbles, nextButton, graph, ffwdBu
 
 const c = document.querySelector('canvas')
 export const ctx = c.getContext('2d')
-const showData = <HTMLButtonElement>document.querySelector("#showData")
-
 export const cw = c.width = 600
 export const ch = c.height = 400
 
 let generation = 0
-
 let bagWhite = 50, bagBlack = 50,
   aliveWhite = 0, aliveBlack = 0,
   deadWhite = 0
