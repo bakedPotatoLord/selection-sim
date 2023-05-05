@@ -94,22 +94,36 @@ export function drawMarbles(
 
 export function nextButton(){
   ctx.fillStyle = 'green'
-  ctx.fillRect(30,340,100,30)
+  ctx.fillRect(10,340,80,30)
   ctx.fillStyle = 'white'
   ctx.font = '30px serif'
-  ctx.fillText("Next",50,364)
+  ctx.fillText("Next",20,364)
+}
+
+export function ffwdButton(){
+  ctx.fillStyle = 'green'
+  ctx.fillRect(100,340,80,30)
+  ctx.fillStyle = 'white'
+  ctx.font = '30px serif'
+  ctx.fillText("Ffwd",110,364)
 }
 
 export function graph(data:GenerationData[]){
   ctx.fillStyle = 'lightGrey'
-  ctx.fillRect(300,40,250,150)
-  ctx.save()
-  ctx.translate(300,40)
-  ctx.scale(1,1/4)
-  ctx.moveTo(0,0)
-  for(let i =0;i<data.length;i++){
-    ctx.lineTo((i/data.length)*300,data[i].numWhite)
+  ctx.font = '14px serif'
+  ctx.fillRect(300,5,250,240)
+  ctx.fillStyle = 'black'
+  ctx.fillText("Generation",310,20)
+  ctx.fillText("white",380,20)
+  ctx.fillText("black",420,20)
+  ctx.fillText("wf",460,20)
+  ctx.fillText("bf",505,20)
+  for(let i=0; i<data.length; i++){
+    ctx.fillText(data[i].generation.toString(),310,40+i*20)
+    ctx.fillText(data[i].numWhite.toString(),380,40+i*20)
+    ctx.fillText(data[i].numBlack.toString(),420,40+i*20)
+    ctx.fillText(data[i].whiteFrequency.toPrecision(4),460,40+i*20)
+    ctx.fillText(data[i].blackFrequency.toPrecision(4),505,40+i*20)
+    
   }
-  ctx.stroke()
-  ctx.restore()
 }

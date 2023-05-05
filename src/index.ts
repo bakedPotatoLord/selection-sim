@@ -1,7 +1,7 @@
 //@author  @bakedpotatolord
 import './style.css'
-import {runSimulation, GenerationData, pickRandom} from './runSimulation.js'
-import {drawBackground, drawOverlayText,drawMarbles, nextButton, graph} from './drawing.js'
+import { GenerationData, pickRandom} from './runSimulation.js'
+import {drawBackground, drawOverlayText,drawMarbles, nextButton, graph, ffwdButton} from './drawing.js'
 
 const c = document.querySelector('canvas')
 export const ctx = c.getContext('2d')
@@ -30,6 +30,7 @@ function mainLoop(){
     deadWhite
   )
   nextButton()
+  ffwdButton()
   graph(data)
 
 }
@@ -55,26 +56,35 @@ function next(){
       bagWhite-=2
       deadWhite+=2
     }
+    return false
   }else{
     bagBlack = aliveBlack
     bagWhite = aliveWhite
     aliveBlack = 0
     aliveWhite = 0
     generation++
+    data.push(new GenerationData(bagBlack,bagWhite,generation))
+    return true
   }
 
 }
 
+function ffwd(){
+  while(!next()){}
+}
+
 c.onclick = (e)=>{
-  console.log(e.x,e.y)
-  if(e.x > 30 && e.x < 130 && e.y > 340 && e.y < 370){
+  if(e.x > 10 && e.x < 90 && e.y > 340 && e.y < 370){
     next()
+  }
+  if(e.x >100 && e.x <180 && e.y >340 && e.y < 370){
+    ffwd()
+
   }
 }
 
 
 window.onload = ()=>{
-  data = runSimulation()
 
   mainLoop()
 }
